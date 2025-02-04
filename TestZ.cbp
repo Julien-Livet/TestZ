@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TestZ" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/TestZ" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/TestZ" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_add.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_add.h" />
+		<Unit filename="z_and.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_and.h" />
+		<Unit filename="z_cmp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_cmp.h" />
+		<Unit filename="z_div_q.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_div_q.h" />
+		<Unit filename="z_div_qr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_div_qr.h" />
+		<Unit filename="z_div_r.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_div_r.h" />
+		<Unit filename="z_fits.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_fits.h" />
+		<Unit filename="z_from.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_from.h" />
+		<Unit filename="z_lshift.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_lshift.h" />
+		<Unit filename="z_mul.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_mul.h" />
+		<Unit filename="z_or.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_or.h" />
+		<Unit filename="z_pow.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_pow.h" />
+		<Unit filename="z_powm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_powm.h" />
+		<Unit filename="z_prime.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_prime.h" />
+		<Unit filename="z_rshift.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_rshift.h" />
+		<Unit filename="z_set_from.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_set_from.h" />
+		<Unit filename="z_sub.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_sub.h" />
+		<Unit filename="z_t.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_t.h" />
+		<Unit filename="z_to.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_to.h" />
+		<Unit filename="z_xor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="z_xor.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
