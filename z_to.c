@@ -279,7 +279,7 @@ char* z_to_str(z_t z, size_t base)
         {
             z_t tmp = z_div_r_c(number, 16);
 
-            if (z_cmp_c(number, 10) < 0)
+            if (z_cmp_c(tmp, 10) < 0)
             {
                 char* sTmp = malloc(strlen(s) + 1);
                 memcpy(sTmp, s, strlen(s) + 1);
@@ -325,7 +325,7 @@ char* z_to_str(z_t z, size_t base)
         {
             z_t tmp = z_div_r_ull(number, base);
 
-            if (z_cmp_c(number, 10) < 0)
+            if (z_cmp_c(tmp, 10) < 0)
             {
                 char* sTmp = malloc(strlen(s) + 1);
                 memcpy(sTmp, s, strlen(s) + 1);
@@ -334,7 +334,7 @@ char* z_to_str(z_t z, size_t base)
 
                 free(sTmp);
             }
-            else if (z_cmp_c(number, -36) < 0)
+            else if (z_cmp_c(tmp, -36) < 0)
             {
                 char* sTmp = malloc(strlen(s) + 1);
                 memcpy(sTmp, s, strlen(s) + 1);
