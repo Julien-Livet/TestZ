@@ -421,6 +421,7 @@ int z_is_prime(z_t n, size_t reps)
     z_free(&s);
     z_free(&m);
     z_free(&R);
+    z_free(&R2modm);
     z_free(&number);
     z_free(&a);
 
