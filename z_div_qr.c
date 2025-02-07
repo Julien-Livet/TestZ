@@ -289,7 +289,9 @@ void _div2n1n(z_t a, z_t b, z_t n, z_t* q, z_t* r)
     z_and_z(&a3, mask);
 
     _div3n2n(a1, a2, bTmp, b1, b2, half_n, &q1, r);
-    _div3n2n(*r, a3, bTmp, b1, b2, half_n, &q2, r);
+    z_t rTmp = z_copy(*r);
+    _div3n2n(rTmp, a3, bTmp, b1, b2, half_n, &q2, r);
+    z_free(&rTmp);
 
     if (z_cmp_c(pad, 0))
         z_rshift_c(r, 1);
