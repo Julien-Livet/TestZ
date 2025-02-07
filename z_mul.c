@@ -338,7 +338,7 @@ void z_mul_z(z_t* lhs, z_t rhs)
             z_free(&rhsTmp);
         }
         else
-        {printf("mul5b\n");
+        {
             z_t other = z_copy(rhs);
             z_neg(&other);
 
