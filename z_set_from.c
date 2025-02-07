@@ -231,9 +231,6 @@ void z_set_from_uc(z_t* z, unsigned char n)
     z->is_nan = false;
     z->is_infinity = false;
 
-    if (n < 0)
-        n = -n;
-
     assert(z->bits);
 
     size_t const s = sizeof(unsigned char);
@@ -262,9 +259,6 @@ void z_set_from_ui(z_t* z, unsigned int n)
 
     z->is_nan = false;
     z->is_infinity = false;
-
-    if (n < 0)
-        n = -n;
 
     assert(z->bits);
 
@@ -295,9 +289,6 @@ void z_set_from_ul(z_t* z, unsigned long n)
     z->is_nan = false;
     z->is_infinity = false;
 
-    if (n < 0)
-        n = -n;
-
     assert(z->bits);
 
     size_t const s = sizeof(unsigned long);
@@ -327,9 +318,6 @@ void z_set_from_ull(z_t* z, unsigned long long n)
     z->is_nan = false;
     z->is_infinity = false;
 
-    if (n < 0)
-        n = -n;
-
     assert(z->bits);
 
     size_t const s = sizeof(unsigned long long);
@@ -358,9 +346,6 @@ void z_set_from_us(z_t* z, unsigned short n)
 
     z->is_nan = false;
     z->is_infinity = false;
-
-    if (n < 0)
-        n = -n;
 
     assert(z->bits);
 
