@@ -15,7 +15,7 @@ bool z_is_coprime(z_t a, z_t b)
     return res;
 }
 
-#include "primes_2_000_000.h"
+#include "primes_3_000_000.h"
 
 size_t lower_bound(unsigned int const* array, size_t first, size_t last, unsigned int value)
 {
@@ -263,6 +263,7 @@ int z_is_prime(z_t n, size_t reps)
             if (!z_cmp_c(r, 0))
             {
                 z_free(&r);
+                z_free(&sqrtLimit);
 
                 return 0;
             }
@@ -271,6 +272,8 @@ int z_is_prime(z_t n, size_t reps)
 
             ++i;
         }
+        
+        z_free(&sqrtLimit);
 
         if (i != PRIMES_SIZE)
             return 2;
