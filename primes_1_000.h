@@ -1,4 +1,4 @@
-#define PRIMES_SIZE 1'000
+#define PRIMES_SIZE 1000
 
 unsigned int const primes[PRIMES_SIZE] = {
 3,

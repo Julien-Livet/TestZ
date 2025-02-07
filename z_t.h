@@ -2,6 +2,7 @@
 #define Z_T_H
 
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
 typedef uintmax_t z_type;

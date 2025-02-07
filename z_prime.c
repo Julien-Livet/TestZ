@@ -378,7 +378,7 @@ int z_is_prime(z_t n, size_t reps)
     for (size_t i = 0; i < reps; ++i)
     {
         z_free(&a);
-        a = z_copy(n);/*
+        a = z_copy(n);
         z_set_random(&a);
         z_set_positive(&a);
         tmp = z_div_r_z(a, number);
@@ -412,7 +412,7 @@ int z_is_prime(z_t n, size_t reps)
 
         z_free(&tmp);
         z_free(&temp);
-        z_free(&mod);*/
+        z_free(&mod);
     }
 
     z_free(&R_);
