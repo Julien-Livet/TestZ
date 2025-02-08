@@ -3,115 +3,28 @@
 
 #include "z_div_qr.h"
 
-void z_div_qr_uc(z_t lhs, unsigned char rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_uc(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
+#define Z_DIV_QR(suffix, type)                              \
+void z_div_qr_##suffix(z_t lhs, type rhs, z_t* q, z_t* r)   \
+{                                                           \
+    assert(q && r);                                         \
+                                                            \
+    z_t other = z_from_##suffix(rhs);                       \
+                                                            \
+    z_div_qr_z(lhs, other, q, r);                           \
+                                                            \
+    z_free(&other);                                         \
 }
 
-void z_div_qr_ui(z_t lhs, unsigned int rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_ui(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
-
-void z_div_qr_ul(z_t lhs, unsigned long rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_ul(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
-
-void z_div_qr_ull(z_t lhs, unsigned long long rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_ull(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
-
-void z_div_qr_us(z_t lhs, unsigned short rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_us(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
-
-void z_div_qr_c(z_t lhs, char rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_c(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
-
-void z_div_qr_i(z_t lhs, int rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_i(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
-
-void z_div_qr_l(z_t lhs, long rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_l(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
-
-void z_div_qr_ll(z_t lhs, long long rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_ll(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
-
-void z_div_qr_s(z_t lhs, short rhs, z_t* q, z_t* r)
-{
-    assert(q && r);
-
-    z_t other = z_from_s(rhs);
-
-    z_div_qr_z(lhs, other, q, r);
-
-    z_free(&other);
-}
+Z_DIV_QR(c, char)
+Z_DIV_QR(i, int)
+Z_DIV_QR(l, long)
+Z_DIV_QR(ll, long long)
+Z_DIV_QR(s, short)
+Z_DIV_QR(uc, unsigned char)
+Z_DIV_QR(ui, unsigned int)
+Z_DIV_QR(ul, unsigned long)
+Z_DIV_QR(ull, unsigned long long)
+Z_DIV_QR(us, unsigned short)
 
 void inner1(z_t* a_digits, z_t x, z_t L, z_t R, z_t n)
 {
@@ -289,9 +202,7 @@ void _div2n1n(z_t a, z_t b, z_t n, z_t* q, z_t* r)
     z_and_z(&a3, mask);
 
     _div3n2n(a1, a2, bTmp, b1, b2, half_n, &q1, r);
-    z_t rTmp = z_copy(*r);
-    _div3n2n(rTmp, a3, bTmp, b1, b2, half_n, &q2, r);
-    z_free(&rTmp);
+    _div3n2n(*r, a3, bTmp, b1, b2, half_n, &q2, r);
 
     if (z_cmp_c(pad, 0))
         z_rshift_c(r, 1);

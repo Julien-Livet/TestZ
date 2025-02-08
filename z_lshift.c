@@ -4,115 +4,28 @@
 
 #include "z_lshift.h"
 
-void z_lshift_uc(z_t* lhs, unsigned char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_uc(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
+#define Z_LSHIFT(suffix, type)              \
+void z_lshift_##suffix(z_t* lhs, type rhs)  \
+{                                           \
+    assert(lhs);                            \
+                                            \
+    z_t other = z_from_##suffix(rhs);       \
+                                            \
+    z_lshift_z(lhs, other);                 \
+                                            \
+    z_free(&other);                         \
 }
 
-void z_lshift_ui(z_t* lhs, unsigned int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ui(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_lshift_ul(z_t* lhs, unsigned long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ul(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_lshift_ull(z_t* lhs, unsigned long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ull(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_lshift_us(z_t* lhs, unsigned short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_us(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_lshift_c(z_t* lhs, char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_c(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_lshift_i(z_t* lhs, int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_i(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_lshift_l(z_t* lhs, long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_l(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_lshift_ll(z_t* lhs, long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ll(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_lshift_s(z_t* lhs, short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_s(rhs);
-
-    z_lshift_z(lhs, other);
-
-    z_free(&other);
-}
+Z_LSHIFT(c, char)
+Z_LSHIFT(i, int)
+Z_LSHIFT(l, long)
+Z_LSHIFT(ll, long long)
+Z_LSHIFT(s, short)
+Z_LSHIFT(uc, unsigned char)
+Z_LSHIFT(ui, unsigned int)
+Z_LSHIFT(ul, unsigned long)
+Z_LSHIFT(ull, unsigned long long)
+Z_LSHIFT(us, unsigned short)
 
 void z_lshift_z(z_t* lhs, z_t rhs)
 {

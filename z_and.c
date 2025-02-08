@@ -4,115 +4,28 @@
 
 #include "z_and.h"
 
-void z_and_uc(z_t* lhs, unsigned char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_uc(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
+#define Z_AND(suffix, type)             \
+void z_and_##suffix(z_t* lhs, type rhs) \
+{                                       \
+    assert(lhs);                        \
+                                        \
+    z_t other = z_from_##suffix(rhs);   \
+                                        \
+    z_and_z(lhs, other);                \
+                                        \
+    z_free(&other);                     \
 }
 
-void z_and_ui(z_t* lhs, unsigned int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ui(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_and_ul(z_t* lhs, unsigned long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ul(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_and_ull(z_t* lhs, unsigned long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ull(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_and_us(z_t* lhs, unsigned short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_us(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_and_c(z_t* lhs, char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_c(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_and_i(z_t* lhs, int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_i(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_and_l(z_t* lhs, long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_l(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_and_ll(z_t* lhs, long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ll(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_and_s(z_t* lhs, short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_s(rhs);
-
-    z_and_z(lhs, other);
-
-    z_free(&other);
-}
+Z_AND(c, char)
+Z_AND(i, int)
+Z_AND(l, long)
+Z_AND(ll, long long)
+Z_AND(s, short)
+Z_AND(uc, unsigned char)
+Z_AND(ui, unsigned int)
+Z_AND(ul, unsigned long)
+Z_AND(ull, unsigned long long)
+Z_AND(us, unsigned short)
 
 void z_and_z(z_t* lhs, z_t rhs)
 {

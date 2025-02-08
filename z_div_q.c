@@ -1,114 +1,27 @@
 #include "z_div_q.h"
 
-z_t z_div_q_uc(z_t lhs, unsigned char rhs)
-{
-    z_t other = z_from_uc(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
+#define Z_DIV_Q(suffix, type)           \
+z_t z_div_q_##suffix(z_t lhs, type rhs) \
+{                                       \
+    z_t other = z_from_##suffix(rhs);   \
+                                        \
+    z_t q = z_div_q_z(lhs, other);      \
+                                        \
+    z_free(&other);                     \
+                                        \
+    return q;                           \
 }
 
-z_t z_div_q_ui(z_t lhs, unsigned int rhs)
-{
-    z_t other = z_from_ui(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
-
-z_t z_div_q_ul(z_t lhs, unsigned long rhs)
-{
-    z_t other = z_from_ul(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
-
-z_t z_div_q_ull(z_t lhs, unsigned long long rhs)
-{
-    z_t other = z_from_ull(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
-
-z_t z_div_q_us(z_t lhs, unsigned short rhs)
-{
-    z_t other = z_from_us(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
-
-z_t z_div_q_c(z_t lhs, char rhs)
-{
-    z_t other = z_from_c(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
-
-z_t z_div_q_i(z_t lhs, int rhs)
-{
-    z_t other = z_from_i(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
-
-z_t z_div_q_l(z_t lhs, long rhs)
-{
-    z_t other = z_from_l(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
-
-z_t z_div_q_ll(z_t lhs, long long rhs)
-{
-    z_t other = z_from_ll(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
-
-z_t z_div_q_s(z_t lhs, short rhs)
-{
-    z_t other = z_from_s(rhs);
-
-    z_t q = z_div_q_z(lhs, other);
-
-    z_free(&other);
-
-    return q;
-}
+Z_DIV_Q(c, char)
+Z_DIV_Q(i, int)
+Z_DIV_Q(l, long)
+Z_DIV_Q(ll, long long)
+Z_DIV_Q(s, short)
+Z_DIV_Q(uc, unsigned char)
+Z_DIV_Q(ui, unsigned int)
+Z_DIV_Q(ul, unsigned long)
+Z_DIV_Q(ull, unsigned long long)
+Z_DIV_Q(us, unsigned short)
 
 z_t z_div_q_z(z_t lhs, z_t rhs)
 {

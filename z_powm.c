@@ -2,70 +2,30 @@
 
 #include "z_powm.h"
 
-z_t z_powm_c(z_t base, char exp, char mod)
-{
-    z_t e = z_from_c(exp);
-    z_t m = z_from_c(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
+#define Z_POWM(suffix, type)                        \
+z_t z_powm_##suffix(z_t base, type exp, type mod)   \
+{                                                   \
+    z_t e = z_from_##suffix(exp);                   \
+    z_t m = z_from_##suffix(mod);                   \
+                                                    \
+    z_t p = z_powm_z(base, e, m);                   \
+                                                    \
+    z_free(&e);                                     \
+    z_free(&m);                                     \
+                                                    \
+    return p;                                       \
 }
 
-z_t z_powm_i(z_t base, int exp, int mod)
-{
-    z_t e = z_from_i(exp);
-    z_t m = z_from_i(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
-}
-
-z_t z_powm_l(z_t base, long exp, long mod)
-{
-    z_t e = z_from_l(exp);
-    z_t m = z_from_l(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
-}
-
-z_t z_powm_ll(z_t base, long long exp, long long mod)
-{
-    z_t e = z_from_ll(exp);
-    z_t m = z_from_ll(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
-}
-
-z_t z_powm_s(z_t base, short exp, short mod)
-{
-    z_t e = z_from_s(exp);
-    z_t m = z_from_s(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
-}
+Z_POWM(c, char)
+Z_POWM(i, int)
+Z_POWM(l, long)
+Z_POWM(ll, long long)
+Z_POWM(s, short)
+Z_POWM(uc, unsigned char)
+Z_POWM(ui, unsigned int)
+Z_POWM(ul, unsigned long)
+Z_POWM(ull, unsigned long long)
+Z_POWM(us, unsigned short)
 
 z_t z_powm_z(z_t base, z_t exp, z_t mod)
 {
@@ -106,69 +66,4 @@ z_t z_powm_z(z_t base, z_t exp, z_t mod)
     z_free(&e);
 
     return result;
-}
-
-z_t z_powm_uc(z_t base, unsigned char exp, unsigned char mod)
-{
-    z_t e = z_from_uc(exp);
-    z_t m = z_from_uc(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
-}
-
-z_t z_powm_ui(z_t base, unsigned int exp, unsigned int mod)
-{
-    z_t e = z_from_ui(exp);
-    z_t m = z_from_ui(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
-}
-
-z_t z_powm_ul(z_t base, unsigned long exp, unsigned long mod)
-{
-    z_t e = z_from_ul(exp);
-    z_t m = z_from_ul(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
-}
-
-z_t z_powm_ull(z_t base, unsigned long long exp, unsigned long long mod)
-{
-    z_t e = z_from_ull(exp);
-    z_t m = z_from_ull(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
-}
-
-z_t z_powm_us(z_t base, unsigned short exp, unsigned short mod)
-{
-    z_t e = z_from_us(exp);
-    z_t m = z_from_us(mod);
-
-    z_t p = z_powm_z(base, e, m);
-
-    z_free(&e);
-    z_free(&m);
-
-    return p;
 }

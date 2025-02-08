@@ -4,37 +4,49 @@
 
 #include "z_set_from.h"
 
-void z_set_from_c(z_t* z, char n)
-{
-    assert(z);
-
-    z->is_positive = (n >= 0);
-
-    size_t size = sizeof(char) / sizeof(z_type);
-
-    if (sizeof(char) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(char);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
+#define Z_SET_FROM(suffix, type)                                    \
+void z_set_from_##suffix(z_t* z, type n)                            \
+{                                                                   \
+    assert(z);                                                      \
+                                                                    \
+    z->is_positive = (n >= 0);                                      \
+                                                                    \
+    size_t size = sizeof(type) / sizeof(z_type);                    \
+                                                                    \
+    if (sizeof(type) % sizeof(z_type))                              \
+        ++size;                                                     \
+                                                                    \
+    if (size > z->size)                                             \
+    {                                                               \
+        z->size = size;                                             \
+        free(z->bits);                                              \
+        z->bits = malloc(z->size * sizeof(z_type));                 \
+    }                                                               \
+                                                                    \
+    z->is_nan = false;                                              \
+    z->is_infinity = false;                                         \
+                                                                    \
+    if (n < 0)                                                      \
+        n = -n;                                                     \
+                                                                    \
+    assert(z->bits);                                                \
+                                                                    \
+    size_t const s = sizeof(type);                                  \
+                                                                    \
+    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);  \
+    memcpy(z->bits, &n, s);                                         \
 }
+
+Z_SET_FROM(c, char)
+Z_SET_FROM(i, int)
+Z_SET_FROM(l, long)
+Z_SET_FROM(ll, long long)
+Z_SET_FROM(s, short)
+Z_SET_FROM(uc, unsigned char)
+Z_SET_FROM(ui, unsigned int)
+Z_SET_FROM(ul, unsigned long)
+Z_SET_FROM(ull, unsigned long long)
+Z_SET_FROM(us, unsigned short)
 
 void z_set_from_data(z_t* z, void const* data, size_t size)
 {
@@ -73,134 +85,6 @@ void z_set_from_data(z_t* z, void const* data, size_t size)
     }
 }
 
-void z_set_from_i(z_t* z, int n)
-{
-    assert(z);
-
-    z->is_positive = (n >= 0);
-
-    size_t size = sizeof(int) / sizeof(z_type);
-
-    if (sizeof(int) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(int);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
-}
-
-void z_set_from_l(z_t* z, long n)
-{
-    assert(z);
-
-    z->is_positive = (n >= 0);
-
-    size_t size = sizeof(long) / sizeof(z_type);
-
-    if (sizeof(long) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(long);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
-}
-
-void z_set_from_ll(z_t* z, long long n)
-{
-    assert(z);
-
-    z->is_positive = (n >= 0);
-
-    size_t size = sizeof(long long) / sizeof(z_type);
-
-    if (sizeof(long long) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(long long);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
-}
-
-void z_set_from_s(z_t* z, short n)
-{
-    assert(z);
-
-    z->is_positive = (n >= 0);
-
-    size_t size = sizeof(short) / sizeof(z_type);
-
-    if (sizeof(short) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(short);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
-}
-
 void z_set_from_str(z_t* z, char const* n, size_t base)
 {
     assert(z);
@@ -208,151 +92,6 @@ void z_set_from_str(z_t* z, char const* n, size_t base)
     z_free(z);
 
     *z = z_from_str(n, base);
-}
-
-void z_set_from_uc(z_t* z, unsigned char n)
-{
-    assert(z);
-
-    z->is_positive = true;
-
-    size_t size = sizeof(unsigned char) / sizeof(z_type);
-
-    if (sizeof(unsigned char) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(unsigned char);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
-}
-
-void z_set_from_ui(z_t* z, unsigned int n)
-{
-    assert(z);
-
-    z->is_positive = true;
-
-    size_t size = sizeof(unsigned int) / sizeof(z_type);
-
-    if (sizeof(unsigned int) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(unsigned int);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
-}
-
-void z_set_from_ul(z_t* z, unsigned long n)
-{
-    assert(z);
-
-    z->is_positive = true;
-
-    size_t size = sizeof(unsigned long) / sizeof(z_type);
-
-    if (sizeof(unsigned long) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(unsigned long);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
-}
-
-void z_set_from_ull(z_t* z, unsigned long long n)
-{
-    assert(z);
-
-    z->is_positive = true;
-
-    size_t size = sizeof(unsigned long long) / sizeof(z_type);
-
-    if (sizeof(unsigned long long) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(unsigned long long);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
-}
-
-void z_set_from_us(z_t* z, unsigned short n)
-{
-    assert(z);
-
-    z->is_positive = true;
-
-    size_t size = sizeof(unsigned short) / sizeof(z_type);
-
-    if (sizeof(unsigned short) % sizeof(z_type))
-        ++size;
-
-    if (size > z->size)
-    {
-        z->size = size;
-        free(z->bits);
-        z->bits = malloc(z->size * sizeof(z_type));
-    }
-
-    z->is_nan = false;
-    z->is_infinity = false;
-
-    assert(z->bits);
-
-    size_t const s = sizeof(unsigned short);
-
-    memset((void*)(z->bits) + s, 0, z->size * sizeof(z_type) - s);
-    memcpy(z->bits, &n, s);
 }
 
 void z_set_from_z(z_t* z, z_t n)

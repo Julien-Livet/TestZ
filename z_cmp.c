@@ -1,114 +1,27 @@
 #include "z_cmp.h"
 
-int z_cmp_uc(z_t lhs, unsigned char rhs)
-{
-    z_t other = z_from_uc(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
+#define Z_CMP(suffix, type)             \
+int z_cmp_##suffix(z_t lhs, type rhs)   \
+{                                       \
+    z_t other = z_from_##suffix(rhs);   \
+                                        \
+    int cmp = z_cmp_z(lhs, other);      \
+                                        \
+    z_free(&other);                     \
+                                        \
+    return cmp;                         \
 }
 
-int z_cmp_ui(z_t lhs, unsigned int rhs)
-{
-    z_t other = z_from_ui(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
-
-int z_cmp_ul(z_t lhs, unsigned long rhs)
-{
-    z_t other = z_from_ul(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
-
-int z_cmp_ull(z_t lhs, unsigned long long rhs)
-{
-    z_t other = z_from_ull(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
-
-int z_cmp_us(z_t lhs, unsigned short rhs)
-{
-    z_t other = z_from_us(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
-
-int z_cmp_c(z_t lhs, char rhs)
-{
-    z_t other = z_from_c(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
-
-int z_cmp_i(z_t lhs, int rhs)
-{
-    z_t other = z_from_i(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
-
-int z_cmp_l(z_t lhs, long rhs)
-{
-    z_t other = z_from_l(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
-
-int z_cmp_ll(z_t lhs, long long rhs)
-{
-    z_t other = z_from_ll(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
-
-int z_cmp_s(z_t lhs, short rhs)
-{
-    z_t other = z_from_s(rhs);
-
-    int cmp = z_cmp_z(lhs, other);
-
-    z_free(&other);
-
-    return cmp;
-}
+Z_CMP(c, char)
+Z_CMP(i, int)
+Z_CMP(l, long)
+Z_CMP(ll, long long)
+Z_CMP(s, short)
+Z_CMP(uc, unsigned char)
+Z_CMP(ui, unsigned int)
+Z_CMP(ul, unsigned long)
+Z_CMP(ull, unsigned long long)
+Z_CMP(us, unsigned short)
 
 int z_cmp_z(z_t lhs, z_t rhs)
 {

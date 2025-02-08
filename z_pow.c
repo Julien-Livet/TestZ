@@ -2,60 +2,28 @@
 
 #include "z_pow.h"
 
-z_t z_pow_c(z_t base, char exp)
-{
-    z_t e = z_from_c(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
+#define Z_POW(suffix, type)             \
+z_t z_pow_##suffix(z_t base, type exp)  \
+{                                       \
+    z_t e = z_from_##suffix(exp);       \
+                                        \
+    z_t p = z_pow_z(base, e);           \
+                                        \
+    z_free(&e);                         \
+                                        \
+    return p;                           \
 }
 
-z_t z_pow_i(z_t base, int exp)
-{
-    z_t e = z_from_i(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
-}
-
-z_t z_pow_l(z_t base, long exp)
-{
-    z_t e = z_from_l(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
-}
-
-z_t z_pow_ll(z_t base, long long exp)
-{
-    z_t e = z_from_ll(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
-}
-
-z_t z_pow_s(z_t base, short exp)
-{
-    z_t e = z_from_s(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
-}
+Z_POW(c, char)
+Z_POW(i, int)
+Z_POW(l, long)
+Z_POW(ll, long long)
+Z_POW(s, short)
+Z_POW(uc, unsigned char)
+Z_POW(ui, unsigned int)
+Z_POW(ul, unsigned long)
+Z_POW(ull, unsigned long long)
+Z_POW(us, unsigned short)
 
 z_t z_pow_z(z_t base, z_t exp)
 {
@@ -134,59 +102,4 @@ z_t z_pow_z(z_t base, z_t exp)
     z_free(&b);
 
     return result;
-}
-
-z_t z_pow_uc(z_t base, unsigned char exp)
-{
-    z_t e = z_from_uc(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
-}
-
-z_t z_pow_ui(z_t base, unsigned int exp)
-{
-    z_t e = z_from_ui(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
-}
-
-z_t z_pow_ul(z_t base, unsigned long exp)
-{
-    z_t e = z_from_ul(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
-}
-
-z_t z_pow_ull(z_t base, unsigned long long exp)
-{
-    z_t e = z_from_ull(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
-}
-
-z_t z_pow_us(z_t base, unsigned short exp)
-{
-    z_t e = z_from_us(exp);
-
-    z_t p = z_pow_z(base, e);
-
-    z_free(&e);
-
-    return p;
 }

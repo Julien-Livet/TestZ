@@ -5,34 +5,46 @@
 
 #include "z_from.h"
 
-z_t z_from_c(char n)
-{
-    z_t z;
-
-    z.is_positive = (n >= 0);
-    z.size = sizeof(char) / sizeof(z_type);
-
-    if (sizeof(char) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(char);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
-
-    return z;
+#define Z_FROM(suffix, type)                                            \
+z_t z_from_##suffix(type n)                                             \
+{                                                                       \
+    z_t z;                                                              \
+                                                                        \
+    z.is_positive = (n >= 0);                                           \
+    z.size = sizeof(type) / sizeof(z_type);                             \
+                                                                        \
+    if (sizeof(type) % sizeof(z_type))                                  \
+        ++z.size;                                                       \
+                                                                        \
+    z.bits = malloc(z.size * sizeof(z_type));                           \
+                                                                        \
+    z.is_nan = false;                                                   \
+    z.is_infinity = false;                                              \
+    z.is_auto_adjust = true;                                            \
+                                                                        \
+    if (n < 0)                                                          \
+        n = -n;                                                         \
+                                                                        \
+    assert(z.bits);                                                     \
+                                                                        \
+    size_t const size = sizeof(type);                                   \
+                                                                        \
+    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);  \
+    memcpy(z.bits, &n, size);                                           \
+                                                                        \
+    return z;                                                           \
 }
+
+Z_FROM(c, char)
+Z_FROM(i, int)
+Z_FROM(l, long)
+Z_FROM(ll, long long)
+Z_FROM(s, short)
+Z_FROM(uc, unsigned char)
+Z_FROM(ui, unsigned int)
+Z_FROM(ul, unsigned long)
+Z_FROM(ull, unsigned long long)
+Z_FROM(us, unsigned short)
 
 z_t z_from_data(void const* data, size_t size)
 {
@@ -63,118 +75,6 @@ z_t z_from_data(void const* data, size_t size)
         *((char*)(z.bits) + size - 1 - i) = *((char*)(z.bits) + i);
         *((char*)(z.bits) + i) = tmp;
     }
-
-    return z;
-}
-
-z_t z_from_i(int n)
-{
-    z_t z;
-
-    z.is_positive = (n >= 0);
-    z.size = sizeof(int) / sizeof(z_type);
-
-    if (sizeof(int) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(int);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
-
-    return z;
-}
-
-z_t z_from_l(long n)
-{
-    z_t z;
-
-    z.is_positive = (n >= 0);
-    z.size = sizeof(long) / sizeof(z_type);
-
-    if (sizeof(long) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(long);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
-
-    return z;
-}
-
-z_t z_from_ll(long long n)
-{
-    z_t z;
-
-    z.is_positive = (n >= 0);
-    z.size = sizeof(long long) / sizeof(z_type);
-
-    if (sizeof(long long) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(long long);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
-
-    return z;
-}
-
-z_t z_from_s(short n)
-{
-    z_t z;
-
-    z.is_positive = (n >= 0);
-    z.size = sizeof(short) / sizeof(z_type);
-
-    if (sizeof(short) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    if (n < 0)
-        n = -n;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(short);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
 
     return z;
 }
@@ -407,129 +307,6 @@ z_t z_from_str(char const* n, size_t base)
     free(nTmp);
 
     z_adjust(&z);
-
-    return z;
-}
-
-z_t z_from_uc(unsigned char n)
-{
-    z_t z;
-
-    z.is_positive = true;
-    z.size = sizeof(unsigned char) / sizeof(z_type);
-
-    if (sizeof(unsigned char) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(unsigned char);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
-
-    return z;
-}
-
-z_t z_from_ui(unsigned int n)
-{
-    z_t z;
-
-    z.is_positive = true;
-    z.size = sizeof(unsigned int) / sizeof(z_type);
-
-    if (sizeof(unsigned int) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    size_t const size = sizeof(unsigned int);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
-
-    return z;
-}
-
-z_t z_from_ul(unsigned long n)
-{
-    z_t z;
-
-    z.is_positive = true;
-    z.size = sizeof(unsigned long) / sizeof(z_type);
-
-    if (sizeof(unsigned long) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(unsigned long);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
-
-    return z;
-}
-
-z_t z_from_ull(unsigned long long n)
-{
-    z_t z;
-
-    z.is_positive = true;
-    z.size = sizeof(unsigned long long) / sizeof(z_type);
-
-    if (sizeof(unsigned long long) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(unsigned long long);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
-
-    return z;
-}
-
-z_t z_from_us(unsigned short n)
-{
-    z_t z;
-
-    z.is_positive = true;
-    z.size = sizeof(unsigned short) / sizeof(z_type);
-
-    if (sizeof(unsigned short) % sizeof(z_type))
-        ++z.size;
-
-    z.bits = malloc(z.size * sizeof(z_type));
-    z.is_nan = false;
-    z.is_infinity = false;
-    z.is_auto_adjust = true;
-
-    assert(z.bits);
-
-    size_t const size = sizeof(unsigned short);
-
-    memset((void*)(z.bits) + size, 0, z.size * sizeof(z_type) - size);
-    memcpy(z.bits, &n, size);
 
     return z;
 }

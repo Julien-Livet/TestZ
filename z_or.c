@@ -4,115 +4,28 @@
 
 #include "z_or.h"
 
-void z_or_uc(z_t* lhs, unsigned char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_uc(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
+#define Z_OR(suffix, type)              \
+void z_or_##suffix(z_t* lhs, type rhs)  \
+{                                       \
+    assert(lhs);                        \
+                                        \
+    z_t other = z_from_##suffix(rhs);   \
+                                        \
+    z_or_z(lhs, other);                 \
+                                        \
+    z_free(&other);                     \
 }
 
-void z_or_ui(z_t* lhs, unsigned int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ui(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_or_ul(z_t* lhs, unsigned long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ul(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_or_ull(z_t* lhs, unsigned long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ull(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_or_us(z_t* lhs, unsigned short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_us(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_or_c(z_t* lhs, char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_c(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_or_i(z_t* lhs, int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_i(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_or_l(z_t* lhs, long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_l(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_or_ll(z_t* lhs, long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ll(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_or_s(z_t* lhs, short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_s(rhs);
-
-    z_or_z(lhs, other);
-
-    z_free(&other);
-}
+Z_OR(c, char)
+Z_OR(i, int)
+Z_OR(l, long)
+Z_OR(ll, long long)
+Z_OR(s, short)
+Z_OR(uc, unsigned char)
+Z_OR(ui, unsigned int)
+Z_OR(ul, unsigned long)
+Z_OR(ull, unsigned long long)
+Z_OR(us, unsigned short)
 
 void z_or_z(z_t* lhs, z_t rhs)
 {

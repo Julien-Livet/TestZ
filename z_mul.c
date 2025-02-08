@@ -17,115 +17,28 @@ size_t number(longest_type n)
     return number;
 }
 
-void z_mul_uc(z_t* lhs, unsigned char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_uc(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
+#define Z_MUL(suffix, type)             \
+void z_mul_##suffix(z_t* lhs, type rhs) \
+{                                       \
+    assert(lhs);                        \
+                                        \
+    z_t other = z_from_##suffix(rhs);   \
+                                        \
+    z_mul_z(lhs, other);                \
+                                        \
+    z_free(&other);                     \
 }
 
-void z_mul_ui(z_t* lhs, unsigned int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ui(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_mul_ul(z_t* lhs, unsigned long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ul(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_mul_ull(z_t* lhs, unsigned long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ull(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_mul_us(z_t* lhs, unsigned short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_us(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_mul_c(z_t* lhs, char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_c(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_mul_i(z_t* lhs, int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_i(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_mul_l(z_t* lhs, long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_l(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_mul_ll(z_t* lhs, long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ll(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_mul_s(z_t* lhs, short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_s(rhs);
-
-    z_mul_z(lhs, other);
-
-    z_free(&other);
-}
+Z_MUL(c, char)
+Z_MUL(i, int)
+Z_MUL(l, long)
+Z_MUL(ll, long long)
+Z_MUL(s, short)
+Z_MUL(uc, unsigned char)
+Z_MUL(ui, unsigned int)
+Z_MUL(ul, unsigned long)
+Z_MUL(ull, unsigned long long)
+Z_MUL(us, unsigned short)
 
 void z_mul_z(z_t* lhs, z_t rhs)
 {

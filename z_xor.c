@@ -4,115 +4,28 @@
 
 #include "z_xor.h"
 
-void z_xor_uc(z_t* lhs, unsigned char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_uc(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
+#define Z_XOR(suffix, type)             \
+void z_xor_##suffix(z_t* lhs, type rhs) \
+{                                       \
+    assert(lhs);                        \
+                                        \
+    z_t other = z_from_##suffix(rhs);   \
+                                        \
+    z_xor_z(lhs, other);                \
+                                        \
+    z_free(&other);                     \
 }
 
-void z_xor_ui(z_t* lhs, unsigned int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ui(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_xor_ul(z_t* lhs, unsigned long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ul(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_xor_ull(z_t* lhs, unsigned long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ull(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_xor_us(z_t* lhs, unsigned short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_us(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_xor_c(z_t* lhs, char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_c(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_xor_i(z_t* lhs, int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_i(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_xor_l(z_t* lhs, long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_l(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_xor_ll(z_t* lhs, long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ll(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_xor_s(z_t* lhs, short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_s(rhs);
-
-    z_xor_z(lhs, other);
-
-    z_free(&other);
-}
+Z_XOR(c, char)
+Z_XOR(i, int)
+Z_XOR(l, long)
+Z_XOR(ll, long long)
+Z_XOR(s, short)
+Z_XOR(uc, unsigned char)
+Z_XOR(ui, unsigned int)
+Z_XOR(ul, unsigned long)
+Z_XOR(ull, unsigned long long)
+Z_XOR(us, unsigned short)
 
 void z_xor_z(z_t* lhs, z_t rhs)
 {

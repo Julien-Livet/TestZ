@@ -4,115 +4,28 @@
 
 #include "z_add.h"
 
-void z_add_uc(z_t* lhs, unsigned char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_uc(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
+#define Z_ADD(suffix, type)             \
+void z_add_##suffix(z_t* lhs, type rhs) \
+{                                       \
+    assert(lhs);                        \
+                                        \
+    z_t other = z_from_##suffix(rhs);   \
+                                        \
+    z_add_z(lhs, other);                \
+                                        \
+    z_free(&other);                     \
 }
 
-void z_add_ui(z_t* lhs, unsigned int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ui(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_add_ul(z_t* lhs, unsigned long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ul(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_add_ull(z_t* lhs, unsigned long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ull(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_add_us(z_t* lhs, unsigned short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_us(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_add_c(z_t* lhs, char rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_c(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_add_i(z_t* lhs, int rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_i(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_add_l(z_t* lhs, long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_l(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_add_ll(z_t* lhs, long long rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_ll(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
-
-void z_add_s(z_t* lhs, short rhs)
-{
-    assert(lhs);
-
-    z_t other = z_from_s(rhs);
-
-    z_add_z(lhs, other);
-
-    z_free(&other);
-}
+Z_ADD(c, char)
+Z_ADD(i, int)
+Z_ADD(l, long)
+Z_ADD(ll, long long)
+Z_ADD(s, short)
+Z_ADD(uc, unsigned char)
+Z_ADD(ui, unsigned int)
+Z_ADD(ul, unsigned long)
+Z_ADD(ull, unsigned long long)
+Z_ADD(us, unsigned short)
 
 void z_add_z(z_t* lhs, z_t rhs)
 {

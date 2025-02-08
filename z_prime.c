@@ -263,7 +263,6 @@ int z_is_prime(z_t n, size_t reps)
             if (!z_cmp_c(r, 0))
             {
                 z_free(&r);
-                z_free(&sqrtLimit);
 
                 return 0;
             }
@@ -272,8 +271,6 @@ int z_is_prime(z_t n, size_t reps)
 
             ++i;
         }
-        
-        z_free(&sqrtLimit);
 
         if (i != PRIMES_SIZE)
             return 2;
@@ -378,7 +375,7 @@ int z_is_prime(z_t n, size_t reps)
     for (size_t i = 0; i < reps; ++i)
     {
         z_free(&a);
-        a = z_copy(n);
+        a = z_copy(n);/*
         z_set_random(&a);
         z_set_positive(&a);
         tmp = z_div_r_z(a, number);
@@ -412,7 +409,7 @@ int z_is_prime(z_t n, size_t reps)
 
         z_free(&tmp);
         z_free(&temp);
-        z_free(&mod);
+        z_free(&mod);*/
     }
 
     z_free(&R_);
@@ -421,7 +418,6 @@ int z_is_prime(z_t n, size_t reps)
     z_free(&s);
     z_free(&m);
     z_free(&R);
-    z_free(&R2modm);
     z_free(&number);
     z_free(&a);
 

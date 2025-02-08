@@ -6,65 +6,29 @@
 
 #include "z_to.h"
 
-char z_to_c(z_t z)
-{
-    char n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(char), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
+#define Z_TO(suffix, type)                                          \
+type z_to_##suffix(z_t z)                                           \
+{                                                                   \
+    type n = 0;                                                     \
+                                                                    \
+    memcpy(&n, z.bits, MIN(sizeof(type), z.size * sizeof(z_type))); \
+                                                                    \
+    if (!z_is_positive(z))                                          \
+        n = -n;                                                     \
+                                                                    \
+    return n;                                                       \
 }
 
-int z_to_i(z_t z)
-{
-    int n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(int), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
-}
-
-long z_to_l(z_t z)
-{
-    long n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(long), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
-}
-
-long long z_to_ll(z_t z)
-{
-    long long n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(long long), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
-}
-
-short z_to_s(z_t z)
-{
-    short n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(short), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
-}
+Z_TO(c, char)
+Z_TO(i, int)
+Z_TO(l, long)
+Z_TO(ll, long long)
+Z_TO(s, short)
+Z_TO(uc, unsigned char)
+Z_TO(ui, unsigned int)
+Z_TO(ul, unsigned long)
+Z_TO(ull, unsigned long long)
+Z_TO(us, unsigned short)
 
 char* filled_str(unsigned long long n, size_t width, char fillChar)
 {
@@ -384,64 +348,4 @@ char* z_to_str(z_t z, size_t base)
     }
 
     return s;
-}
-
-unsigned char z_to_uc(z_t z)
-{
-    unsigned char n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(unsigned char), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
-}
-
-unsigned int z_to_ui(z_t z)
-{
-    unsigned int n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(unsigned int), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
-}
-
-unsigned long z_to_ul(z_t z)
-{
-    unsigned long n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(unsigned long), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
-}
-
-unsigned long long z_to_ull(z_t z)
-{
-    unsigned long long n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(unsigned long long), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
-}
-
-unsigned short z_to_us(z_t z)
-{
-    unsigned short n = 0;
-
-    memcpy(&n, z.bits, MIN(sizeof(unsigned short), z.size * sizeof(z_type)));
-
-    if (!z_is_positive(z))
-        n = -n;
-
-    return n;
 }
