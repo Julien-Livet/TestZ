@@ -451,6 +451,7 @@ void z_div_qr_z(z_t lhs, z_t rhs, z_t* q, z_t* r)
     z_free(q);
     *q = _digits2int(q_digits, n, a_digits_size);
 
+    z_free(&n);
     free(a_digits);
     free(q_digits);
 }
