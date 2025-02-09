@@ -52,7 +52,11 @@ z_t z_powm_z(z_t base, z_t exp, z_t mod)
 
         z_free(&a);
 
-        z_mul_z(&base_mod, base_mod);
+	z_t base_modTmp = z_copy(base_mod);
+
+        z_mul_z(&base_mod, base_modTmp);
+        
+        z_free(&base_modTmp);
 
         z_t r = z_div_r_z(base_mod, mod);
 
