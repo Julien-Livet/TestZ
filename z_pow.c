@@ -97,7 +97,11 @@ z_t z_pow_z(z_t base, z_t exp)
         if (!z_cmp_c(e, 0))
             break;
 
-        z_mul_z(&b, b);
+	z_t bTmp = z_copy(b);
+
+        z_mul_z(&b, bTmp);
+        
+        z_free(&bTmp);
     }
 
     z_free(&e);
