@@ -35,7 +35,7 @@ z_t z_powm_z(z_t base, z_t exp, z_t mod)
     z_t base_mod = z_div_r_z(base, mod);
     z_t e = z_copy(exp);
 
-    while (z_cmp_c(exp, 0) > 0)
+    while (z_cmp_c(e, 0) > 0)
     {
         z_t a = z_copy(e);
         z_and_c(&a, 1);
