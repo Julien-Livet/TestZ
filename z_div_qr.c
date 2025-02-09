@@ -248,6 +248,8 @@ void _div3n2n(z_t a12, z_t a3, z_t b, z_t b1, z_t b2, z_t n, z_t* q, z_t* r)
     }
     else
         _div2n1n(a12, b1, n, q, r);
+    
+    z_free(&a12Tmp);
 
     z_lshift_z(r, n);
     z_or_z(r, a3);
