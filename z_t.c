@@ -567,7 +567,7 @@ z_t z_sqrt(z_t n)
         z_rshift_c(&mid, 1);
 
         z_t mid2 = z_copy(mid);
-        z_mul_z(&mid2, mid2);
+        z_mul_z(&mid2, mid);
 
         if (z_cmp_z(mid2, n) <= 0)
         {
