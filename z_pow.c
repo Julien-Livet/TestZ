@@ -60,6 +60,8 @@ z_t z_pow_z(z_t base, z_t exp)
 
         if (z_cmp_c(a, 0))
             pow.is_positive = !pow.is_positive;
+            
+        z_free(&a);
 
         return pow;
     }
