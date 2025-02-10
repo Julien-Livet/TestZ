@@ -230,7 +230,7 @@ int z_is_prime(z_t n, size_t reps)
     z_t tmp = z_copy(n);
     z_and_c(&tmp, 1);
 
-    if(!z_cmp_c(tmp, 0))
+    if (!z_cmp_c(tmp, 0))
     {
         z_free(&tmp);
 
@@ -263,6 +263,7 @@ int z_is_prime(z_t n, size_t reps)
             if (!z_cmp_c(r, 0))
             {
                 z_free(&r);
+                z_free(&sqrtLimit);
 
                 return 0;
             }
@@ -271,6 +272,8 @@ int z_is_prime(z_t n, size_t reps)
 
             ++i;
         }
+        
+        z_free(&sqrtLimit);
 
         if (i != PRIMES_SIZE)
             return 2;
