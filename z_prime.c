@@ -454,7 +454,7 @@ z_t z_next_prime(z_t n)
     else
         z_add_c(&nTmp, 1);
 
-    while (!z_is_prime(nTmp, 50))
+    while (!z_is_prime(nTmp, 25))
         z_add_c(&nTmp, 2);
 
     z_free(&tmp);
@@ -497,7 +497,7 @@ z_t z_previous_prime(z_t n)
     else
         z_sub_c(&nTmp, 1);
 
-    while (!z_is_prime(nTmp, 50))
+    while (!z_is_prime(nTmp, 25))
         z_sub_c(&nTmp, 2);
 
     z_free(&tmp);
