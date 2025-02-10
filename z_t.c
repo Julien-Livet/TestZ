@@ -105,8 +105,7 @@ z_t z_gcd(z_t a, z_t b)
 {
     if (z_is_nan(a) || z_is_nan(b) || z_is_infinity(a) || z_is_infinity(b))
         return z_nan();
-
-    if (z_cmp_c(a, 0) < 0)
+    else if (z_cmp_c(a, 0) < 0)
     {
         z_t aTmp = z_abs(a);
 
@@ -116,8 +115,7 @@ z_t z_gcd(z_t a, z_t b)
 
         return gcd;
     }
-
-    if (z_cmp_c(a, 0) < 0)
+    else if (z_cmp_c(b, 0) < 0)
     {
         z_t bTmp = z_abs(b);
 
@@ -127,17 +125,13 @@ z_t z_gcd(z_t a, z_t b)
 
         return gcd;
     }
-
-    if (z_cmp_z(a, b) < 0)
+    else if (z_cmp_z(a, b) < 0)
         return z_gcd(b, a);
-
-    if (!z_cmp_c(a, 0))
+    else if (!z_cmp_c(a, 0))
         return z_copy(b);
-
-    if (!z_cmp_c(b, 0))
+    else if (!z_cmp_c(b, 0))
         return z_copy(a);
-
-    if (z_is_even(a) && z_is_even(b))
+    else if (z_is_even(a) && z_is_even(b))
     {
         z_t aTmp = z_copy(a);
         z_rshift_c(&aTmp, 1);
