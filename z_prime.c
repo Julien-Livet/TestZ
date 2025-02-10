@@ -171,7 +171,7 @@ bool mulmod(z_t a, z_t b, z_t m)
     z_free(&r);
     z_free(&x);
     z_free(&y);
-    z_free(&b);
+    z_free(&bTmp);
 
     return res;
 }
