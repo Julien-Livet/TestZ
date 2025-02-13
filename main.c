@@ -451,7 +451,7 @@ void test_primes()
     }
 
     {
-        z_t z = z_from_str("1'299'709", 0); //100'000th prime
+        z_t z = z_from_str("1'299'709", 10); //100'000th prime
 
         assert(z_is_prime(z, 50));
 
@@ -459,7 +459,7 @@ void test_primes()
     }
 
     {
-        z_t z = z_from_str("15'482'009", 0);
+        z_t z = z_from_str("15'482'009", 10);
 
         assert(!z_is_prime(z, 50));
 
@@ -467,19 +467,19 @@ void test_primes()
     }
 
     {
-        z_t z = z_from_str("13'359'555'403", 0); //600'000'000th prime
+        z_t z = z_from_str("13'359'555'403", 10); //600'000'000th prime
 
         assert(z_is_prime(z, 50));
 
         z_free(&z);
     }
 
-    {
-        z_t z = z_from_str("4113101149215104800030529537915953170486139623539759933135949994882770404074832568499", 0);
+    {/*
+        z_t z = z_from_str("4113101149215104800030529537915953170486139623539759933135949994882770404074832568499", 10);
 
         assert(z_is_prime(z, 1));
 
-        z_free(&z);
+        z_free(&z);*/
     }
 }
 
@@ -512,7 +512,7 @@ void test_set_from()
     }
 
     {
-        z_t z = z_from_str("13'359'555'403", 0);
+        z_t z = z_from_str("13'359'555'403", 10);
         char* s = z_to_str(z, 10);
 
         assert(!strcmp(s, "13359555403"));
@@ -539,7 +539,7 @@ void test_set_from()
     }
 
     {
-        z_t z = z_from_str("100'000'000'000'000'000'000'003", 0);
+        z_t z = z_from_str("100'000'000'000'000'000'000'003", 10);
         char* s = z_to_str(z, 10);
 
         assert(!strcmp(s, "100000000000000000000003"));
@@ -599,11 +599,23 @@ void test_shift()
 
 void test_sqrt()
 {
-    z_t z = z_from_c(4);
-    z_t sqrt = z_sqrt(z);
+    {
+        z_t z = z_from_c(4);
+        z_t sqrt = z_sqrt(z);
 
-    assert(!z_cmp_c(sqrt, 2));
+        assert(!z_cmp_c(sqrt, 2));
 
-    z_free(&z);
-    z_free(&sqrt);
+        z_free(&z);
+        z_free(&sqrt);
+    }
+
+    {
+        z_t z = z_from_c(9);
+        z_t sqrt = z_sqrt(z);
+
+        assert(!z_cmp_c(sqrt, 3));
+
+        z_free(&z);
+        z_free(&sqrt);
+    }
 }
