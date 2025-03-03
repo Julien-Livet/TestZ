@@ -25,7 +25,7 @@ void z_adjust(z_t* z)
 
     size_t i = 0;
 
-    while (!z->bits[i] && i < z->size)
+    while (i < z->size && !z->bits[i])
         ++i;
 
     if (i == z->size)
@@ -285,7 +285,7 @@ void z_invert(z_t* z)
 
     for (size_t i = 0; i < z->size; ++i)
         z->bits[i] = ~z->bits[i];
-    
+
     z->is_positive = !z->is_positive;
 }
 
